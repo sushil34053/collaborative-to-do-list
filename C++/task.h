@@ -113,7 +113,7 @@ public:
         std::cout << "Type: " << (isShared ? "Shared" : "Personal") << "\n";
         
         char timeBuffer[26];
-        ctime_s(timeBuffer, sizeof timeBuffer, &createdAt);
+        std::cout << "Created At: " << std::ctime(&createdAt);
         std::cout << "Created: " << timeBuffer;
         std::cout << "----------------------\n";
     }
