@@ -27,13 +27,13 @@ This project is a **command-line based task management system** implemented in b
 
 ```
 project/
-├── cpp/
+├── C++/
 │   ├── main.cpp
 │   ├── session.h
 │   ├── task.h
 │   ├── taskmanager.h
 │   └── user.h
-├── python/
+├── Python/
 │   ├── main.py
 │   ├── session.py
 │   ├── task.py
