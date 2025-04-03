@@ -98,47 +98,30 @@ If no `users.txt` exists, a default admin account will be created:
 
 ### 🔒 **Error Handling and Type Safety**
 
+
 #### 🧱 C++ Approach
 
 ```cpp
-// From task.h
-static Task deserialize(const std::string& data) {
-    std::vector<std::string> parts;
-    std::string part;
-    size_t pos = 0;
-    std::string delimiter = "|";
-    std::string dataCopy = data;
+#include <iostream>
+#include <stdexcept>
 
-    while ((pos = dataCopy.find(delimiter)) != std::string::npos) {
-        part = dataCopy.substr(0, pos);
-        parts.push_back(part);
-        dataCopy.erase(0, pos + delimiter.length());
+int parseInt(const std::string& input) {
+    try {
+        return std::stoi(input);  // type-safe conversion
+    } catch (const std::invalid_argument& e) {
+        throw std::runtime_error("Invalid number: " + input);
     }
-    parts.push_back(dataCopy); // Add the last part
-
-    if (parts.size() < 8) {
-        throw std::runtime_error("Invalid task data format");
-    }
-
-    int id = std::stoi(parts[0]);
-    Priority priority = static_cast<Priority>(std::stoi(parts[5]));
-    // ...
 }
 ```
 
 #### 🐍 Python Approach
 
 ```python
-# From task.py
-@classmethod
-def deserialize(cls, data):
-    parts = data.strip().split('|')
-    if len(parts) < 8:
-        raise ValueError("Invalid task data format")
-    
-    task_id = int(parts[0])
-    priority = Priority(int(parts[5]))
-    # ...
+def parse_int(input_str):
+    try:
+        return int(input_str)  # dynamic conversion
+    except ValueError:
+        raise ValueError(f"Invalid number: {input_str}")
 ```
 
 #### 🔍 Key Differences
