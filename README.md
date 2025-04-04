@@ -135,3 +135,42 @@ def parse_int(input_str):
 | **Memory Safety**      | Errors like buffer overflows are possible if not careful | Memory safety is handled by the interpreter, reducing risk |
 
 > ⚖️ **Key Takeaway**: C++ enforces error handling and type safety at compile time, offering high control but requiring more code and caution. Python provides a simpler, more flexible model that prioritizes readability and development speed, while relying on runtime checks to handle errors.
+
+
+### 🧠 Memory Management 
+    #### 🧱 C++ Approach
+Task* task = new Task("Title", "Category", "User", Priority::HIGH, true);
+`// Use task`
+delete task;  `// must release memory manually`
+
+    #### 🐍 Python Approach
+task = Task("Title", "Category", "User", Priority.HIGH, True)
+`No need to delete – handled by garbage collector`
+
+### 🔄 Object Lifecycle
+    ### 🧱 C++ Approach
+class Task {
+public:
+    Task(std::string title) {
+        std::cout << "Task created: " << title << "\n";
+    }
+    ~Task() {
+        std::cout << "Task destroyed\n";
+    }
+};
+
+`~Task()` is called when object goes out of scope or is deleted.
+      
+    ### 🐍 Python Approach
+class Task:
+    def __init__(self, title):
+        print(f"Task created: {title}")
+    def __del__(self):
+        print("Task destroyed")
+`__del__()` is not reliable for cleanup (due to non-deterministic GC).
+
+----Key Takeaways 🗝️
+
+    ### C++ gives fine-grained control, useful for performance-critical systems, but with risk of memory leaks if not managed properly.
+
+    ### Python is safer and cleaner, ideal for rapid development, but offers less control over memory.
